@@ -1,7 +1,7 @@
 using System.Linq;
 using System.Threading.Tasks;
-using BizStream.Kentico.Xperience.AspNetCore.Models;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Abstractions;
+using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Models;
 using Kentico.Content.Web.Mvc;
 
 namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages

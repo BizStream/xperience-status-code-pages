@@ -1,5 +1,5 @@
 using System.Threading.Tasks;
-using BizStream.Kentico.Xperience.AspNetCore.Models;
+using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Models;
 
 namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Abstractions
 {

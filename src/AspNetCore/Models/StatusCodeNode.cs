@@ -9,7 +9,7 @@
 // </auto-generated>
 //--------------------------------------------------------------------------------------------------
 
-using BizStream.Kentico.Xperience.AspNetCore.Models;
+using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Models;
 using CMS;
 using CMS.Base;
 using CMS.Helpers;
@@ -18,7 +18,7 @@ using CMS.DocumentEngine;
 
 [assembly: RegisterDocumentType( StatusCodeNode.CLASS_NAME, typeof( StatusCodeNode ) )]
 
-namespace BizStream.Kentico.Xperience.AspNetCore.Models
+namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Models
 {
     /// <summary>
     /// Represents a content item of type StatusCodeNode.

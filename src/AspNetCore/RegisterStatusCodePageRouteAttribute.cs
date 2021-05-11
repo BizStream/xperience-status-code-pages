@@ -1,6 +1,6 @@
 using System;
-using BizStream.Kentico.Xperience.AspNetCore.Models;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Controllers;
+using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Models;
 using CMS;
 using Kentico.Content.Web.Mvc.Routing;
 
