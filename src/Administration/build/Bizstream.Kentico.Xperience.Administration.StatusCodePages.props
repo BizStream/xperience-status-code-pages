@@ -1,0 +1,8 @@
+<Project>
+
+    <PropertyGroup>
+        <StatusCodePagesPackagePath>$([System.IO.Path]::GetFullPath('$(MSBuildThisFileDirectory)\..'))</StatusCodePagesPackagePath>
+        <StatusCodePagesDebugEnabled>false</StatusCodePagesDebugEnabled>
+    </PropertyGroup>
+
+</Project>
