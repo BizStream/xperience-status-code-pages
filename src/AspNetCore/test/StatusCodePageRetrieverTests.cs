@@ -29,7 +29,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests
         }
 
         [SetUp]
-        public void SetUp( )
+        public void StatusCodePageRetrieverSetUp( )
         {
             SiteContext.CurrentSiteName = "NewSite";
         }
