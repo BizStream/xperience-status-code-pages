@@ -24,6 +24,13 @@ steps:
       feedsToUse: select
       vstsFeed: "4053202a-1650-47d7-804a-73158b8e55f7"
 
+  - task: PowerShell@2
+    displayName: generate test config
+    inputs:
+      targetType: inline
+      script: |
+        Set-Content -Path src/AspNetCore/test/appsettings.Development.json -Value '{ "CMSTestLicenseKey": "$(CMSTestLicenseKey)" }'
+
   - task: DotNetCoreCLI@2
     displayName: build projects
     inputs:
@@ -48,13 +55,6 @@ steps:
         Set-Acl $path -AclObject $acl
       failOnStderr: true
       showWarnings: true
-
-  - task: PowerShell@2
-    displayName: generate test config
-    inputs:
-      targetType: inline
-      script: |
-        Set-Content -Path src/AspNetCore/test/appsettings.Development.json -Value '{ "CMSTestLicenseKey": "$(CMSTestLicenseKey)" }'
 
   - task: DotNetCoreCLI@2
     displayName: test netcoreapp3.1
