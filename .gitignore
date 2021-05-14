@@ -267,3 +267,5 @@ AppSettings.config
 ConnectionStrings.config
 
 **/TestDatabases/
+
+**/test/**/appsettings.Development.json

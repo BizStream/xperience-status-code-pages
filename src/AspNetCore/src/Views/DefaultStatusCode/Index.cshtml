@@ -1,0 +1,8 @@
+@using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Models
+@using Kentico.Content.Web.Mvc
+
+@model IPageDataContext<StatusCodeNode>
+
+<h1>@Model.Page.DocumentName</h1>
+
+@Html.Raw( Model.Page.Content )

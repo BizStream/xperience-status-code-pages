@@ -1,4 +1,4 @@
-using CMS.DocumentEngine;
+using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Models;
 using Kentico.Content.Web.Mvc;
 using Microsoft.AspNetCore.Mvc;
 
@@ -11,7 +11,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Controllers
 
         public IActionResult Index( [FromServices] IPageDataContextRetriever pageContextRetriever )
         {
-            if( !pageContextRetriever.TryRetrieve( out IPageDataContext<TreeNode> data ) )
+            if( !pageContextRetriever.TryRetrieve( out IPageDataContext<StatusCodeNode> data ) )
             {
                 return NotFound();
             }

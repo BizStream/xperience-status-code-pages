@@ -57,13 +57,13 @@ steps:
       arguments: -f netcoreapp3.1 --collect:"XPlat Code coverage" --no-build
       testRunTitle: netcoreapp3.1
 
-  - task: DotNetCoreCLI@2
-    displayName: test net5.0
-    inputs:
-      command: test
-      projects: src/**/test/**/BizStream.*.Tests.csproj
-      arguments: -f net5.0 --collect:"XPlat Code coverage" --no-build
-      testRunTitle: net5.0
+  # - task: DotNetCoreCLI@2
+  #   displayName: test net5.0
+  #   inputs:
+  #     command: test
+  #     projects: src/**/test/**/BizStream.*.Tests.csproj
+  #     arguments: -f net5.0 --collect:"XPlat Code coverage" --no-build
+  #     testRunTitle: net5.0
 
   - task: reportgenerator@4
     displayName: generate code coverage

@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using BizStream.Kentico.Xperience.Administration.StatusCodePages.Abstractions;
 using CMS.Base;
@@ -13,12 +14,17 @@ namespace BizStream.Kentico.Xperience.Administration.StatusCodePages
     public class StatusCodePagesImportProvider : IStatusCodePagesImportProvider
     {
         #region Fields
-        // TODO: these consts could be options?
-        private const string ImportPackagePath = @"CMSSiteUtils\Import\BizStream_StatusCodePages.zip";
-        private const string ImportAsUserName = "administrator";
-
         private readonly IEventLogService eventLog;
         private readonly IUserInfoProvider userProvider;
+        #endregion
+
+        #region Properties
+
+        /// <summary> The path at which the Export Archive containing StatusCodePages ObjectsTypes is located. </summary>
+        protected virtual string ImportPackagePath => @"CMSSiteUtils\Import\BizStream_StatusCodePages.zip";
+
+        /// <summary> The <see cref="UserInfo.UserName"/> of the User to execute the import as. </summary>
+        protected virtual string ImportAsUserName => "administrator";
         #endregion
 
         public StatusCodePagesImportProvider(
@@ -47,7 +53,6 @@ namespace BizStream.Kentico.Xperience.Administration.StatusCodePages
                 return;
             }
 
-            // Creates an object containing the import settings
             var settings = new SiteImportSettings( user )
             {
                 SourceFilePath = Path.Combine( SystemContext.WebApplicationPhysicalPath, ImportPackagePath ),
@@ -55,12 +60,20 @@ namespace BizStream.Kentico.Xperience.Administration.StatusCodePages
                 WebsitePath = SystemContext.WebApplicationPhysicalPath
             };
 
-            settings.LoadDefaultSelection();
+            try
+            {
+                settings.LoadDefaultSelection();
 
-            ImportProvider.ImportObjectsData( settings );
-            ImportProvider.DeleteTemporaryFiles( settings, false );
+                ImportProvider.ImportObjectsData( settings );
+                ImportProvider.DeleteTemporaryFiles( settings, false );
 
-            SettingsKeyInfoProvider.SetGlobalValue( SettingKeys.General.AreObjectsImported, true );
+                SettingsKeyInfoProvider.SetGlobalValue( SettingKeys.General.AreObjectsImported, true );
+            }
+            catch( Exception exception )
+            {
+                eventLog.LogException( nameof( StatusCodePagesImportProvider ), nameof( ImportObjectsData ), exception );
+            }
+
             eventLog.LogInformation( nameof( StatusCodePagesImportProvider ), nameof( ImportObjectsData ), "Auto-import has completed." );
         }
 
