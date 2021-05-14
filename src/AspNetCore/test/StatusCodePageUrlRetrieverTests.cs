@@ -19,7 +19,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests
             var pageUrlRetriever = Service.Resolve<IPageUrlRetriever>();
 
             var statusCodePageRetriever = new StatusCodePageRetriever( pageRetriever );
-            return new StatusCodePageUrlRetriever( statusCodePageRetriever, pageUrlRetriever );
+            return new StatusCodePageUrlRetriever( pageUrlRetriever, statusCodePageRetriever );
         }
 
         [Test]

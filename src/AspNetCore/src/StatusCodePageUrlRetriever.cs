@@ -14,12 +14,12 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages
         #endregion
 
         public StatusCodePageUrlRetriever(
-            IStatusCodePageRetriever statusCodePageRetriever,
-            IPageUrlRetriever pageUrlRetriever
+            IPageUrlRetriever pageUrlRetriever,
+            IStatusCodePageRetriever statusCodePageRetriever
         )
         {
-            this.statusCodePageRetriever = statusCodePageRetriever;
             this.pageUrlRetriever = pageUrlRetriever;
+            this.statusCodePageRetriever = statusCodePageRetriever;
         }
 
         /// <inheritdoc />

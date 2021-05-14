@@ -55,8 +55,9 @@ namespace BizStream.Kentico.Xperience.Administration.StatusCodePages
 
             var settings = new SiteImportSettings( user )
             {
-                SourceFilePath = Path.Combine( SystemContext.WebApplicationPhysicalPath, ImportPackagePath ),
+                EnableSearchTasks = false,
                 ImportType = ImportTypeEnum.AllNonConflicting,
+                SourceFilePath = Path.Combine( SystemContext.WebApplicationPhysicalPath, ImportPackagePath ),
                 WebsitePath = SystemContext.WebApplicationPhysicalPath
             };
 

@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Http;
 using System.Reflection;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Models;
 using CMS.Base;
 using CMS.Core;
 using CMS.DocumentEngine;
 using CMS.LicenseProvider;
+using CMS.Membership;
 using CMS.Tests;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Hosting;
 using NUnit.Framework;
 
 namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstractions
@@ -19,8 +20,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
         private static readonly PropertyInfo IoCContainerProperty = typeof( TypeManager ).GetTypeInfo()
             .GetProperty( "IoCContainer", BindingFlags.Static | BindingFlags.NonPublic );
 
-        private WebApplicationFactory factory;
-        protected HttpClient client;
+        protected WebApplicationFactory WebApplicationFactory { get; private set; }
 
         protected virtual WebApplicationFactory CreateWebApplicationFactory( )
             => new WebApplicationFactory();
@@ -55,9 +55,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
             PreventCMSApplicationInitException();
 
             // Start the Mvc app's Host (results in CMSApplication.Init invocation, via the `ApplicationInitializerStartupFilter`)
-            factory.Host.StartAsync()
-                .GetAwaiter()
-                .GetResult();
+            WebApplicationFactory.Host.Start();
 
             EnsureLicenseKeyExists();
             SeedContentTree();
@@ -74,16 +72,18 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
 
             SystemContext.WebApplicationPhysicalPath = TemporaryAppPath;
 
-            if( factory != null )
+            if( WebApplicationFactory != null )
             {
-                factory.Dispose();
-                factory = null;
+                WebApplicationFactory.Dispose();
+                WebApplicationFactory = null;
             }
 
-            factory = CreateWebApplicationFactory();
+            WebApplicationFactory = CreateWebApplicationFactory();
+            //factory.Server.PreserveExecutionContext = true;
+            WebApplicationFactory.Server.AllowSynchronousIO = true;
 
             // Force the Mvc ServiceProvider to be built (results in CMSApplication.PreInit invocation, via `AddKentico(IServiceCollection)`)
-            var services = factory.Services;
+            var services = WebApplicationFactory.Services;
 
             // Ensure the IoCContainer is initialized (with the Mvc app's ServiceProvider)
             SetCMSServiceProvider( services );
@@ -156,17 +156,13 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
                 .GetMethod( "SetServiceProvider", BindingFlags.Instance | BindingFlags.NonPublic )
                 .Invoke( IoCContainerProperty.GetValue( null ), new[] { services } );
 
-        [SetUp]
-        public void SetUp( )
-        {
-            if( client != null )
-            {
-                client.Dispose();
-                client = null;
-            }
-
-            client = factory.CreateClient();
-        }
+        //[TearDown]
+        //public void BaseWebIntegrationTestsTearDown( )
+        //{
+        //    factory.Host.StopAsync()
+        //        .GetAwaiter()
+        //        .GetResult();
+        //}
 
     }
 

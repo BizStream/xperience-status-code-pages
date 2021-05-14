@@ -22,6 +22,8 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests
         [TestCase( "/not-a-real-url" )]
         public async Task InvalidUrl_ShouldReturn404StatusCode( string url )
         {
+            var client = WebApplicationFactory.CreateClient();
+
             var response = await client.GetAsync( url );
 
             Assert.AreEqual( HttpStatusCode.NotFound, response.StatusCode );

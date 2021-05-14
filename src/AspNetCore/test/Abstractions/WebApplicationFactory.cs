@@ -16,8 +16,9 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
     {
         #region Fields
         private readonly Action<IApplicationBuilder> configureApp;
-        private readonly Action<IFeaturesBuilder> configureKentico;
         private readonly Action<IServiceCollection> configureServices;
+
+        private bool disposed;
         #endregion
 
         #region Properties
@@ -26,12 +27,10 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
 
         public WebApplicationFactory(
             Action<IApplicationBuilder> configureApp = null,
-            Action<IFeaturesBuilder> configureKentico = null,
             Action<IServiceCollection> configureServices = null
         )
         {
             this.configureApp = configureApp;
-            this.configureKentico = configureKentico;
             this.configureServices = configureServices;
         }
 
@@ -41,7 +40,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
                     builder => builder.ConfigureServices(
                             services =>
                             {
-                                Startup.ConfigureServices( services, configureKentico );
+                                Startup.ConfigureServices( services );
                                 configureServices?.Invoke( services );
                             }
                         ).Configure(
@@ -55,18 +54,36 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
 
         protected override IHost CreateHost( IHostBuilder builder )
         {
-            Host = builder.Build();
-            return Host;
+            var host = builder.Build();
+            Host = host;
+
+            return host;
         }
 
         protected override void ConfigureWebHost( IWebHostBuilder builder )
             => builder.UseContentRoot( AppDomain.CurrentDomain.BaseDirectory )
                 .UseEnvironment( Environments.Development );
 
+        protected override void Dispose( bool disposing )
+        {
+            if( disposed )
+            {
+                return;
+            }
+
+            if( disposing )
+            {
+                Host?.Dispose();
+            }
+
+            disposed = true;
+            base.Dispose( disposing );
+        }
+
         private static class Startup
         {
 
-            public static void ConfigureServices( IServiceCollection services, Action<IFeaturesBuilder> configureKentico = null )
+            public static void ConfigureServices( IServiceCollection services )
             {
                 services.AddControllersWithViews();
 
@@ -86,8 +103,6 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
                                 EnableAlternativeUrls = true
                             }
                         );
-
-                        configureKentico?.Invoke( features );
                     }
                 ).SetAdminCookiesSameSiteNone()
                     .DisableVirtualContextSecurityForLocalhost();
