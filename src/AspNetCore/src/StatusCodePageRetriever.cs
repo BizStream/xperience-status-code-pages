@@ -21,8 +21,8 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages
         public virtual async Task<StatusCodeNode> RetrieveAsync( int statusCode )
         {
             var nodes = await pageRetriever.RetrieveAsync<StatusCodeNode>(
-                nodes => nodes.TopN( 1 )
-                    .WhereEquals( nameof( StatusCodeNode.HttpStatusCode ), statusCode )
+                nodes => nodes.TopN( 1 ).WhereEquals( nameof( StatusCodeNode.HttpStatusCode ), statusCode ),
+                cache => cache.Key( CacheKeys.StatusCodeNode( statusCode ) )
             );
 
             return nodes?.FirstOrDefault();
