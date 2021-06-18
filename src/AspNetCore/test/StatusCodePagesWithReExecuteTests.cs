@@ -1,30 +1,28 @@
 using System.Net;
 using System.Threading.Tasks;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstractions;
+using Microsoft.AspNetCore.Builder;
 using NUnit.Framework;
 
 namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests
 {
 
-    [TestFixture( Category = "Integration" )]
+    [TestFixture( Category = "IsolatedMvc" )]
     [TestOf( typeof( XperienceStatusCodePagesExtensions ) )]
-    public class StatusCodePagesWithReExecuteTests : BaseWebIntegrationTests
+    public class StatusCodePagesWithReExecuteTests : StatusCodePagesTests<StatusCodePagesWithReExecuteTests.Startup>
     {
-
-        protected override WebApplicationFactory CreateWebApplicationFactory( )
-            => new WebApplicationFactory(
-                app => app.UseXperienceStatusCodePagesWithReExecute(),
-                configureServices: services => services.AddXperienceStatusCodePages()
-            );
+        public class Startup : StatusCodePagesTestsStartup
+        {
+            public override void ConfigureTests( IApplicationBuilder app )
+                => app.UseXperienceStatusCodePagesWithReExecute();
+        }
 
         [Test]
         [TestCase( "/asfda" )]
         [TestCase( "/not-a-real-url" )]
         public async Task InvalidUrl_ShouldReturn404StatusCode( string url )
         {
-            var client = WebApplicationFactory.CreateClient();
-
-            var response = await client.GetAsync( url );
+            var response = await Client.GetAsync( url );
 
             Assert.AreEqual( HttpStatusCode.NotFound, response.StatusCode );
         }

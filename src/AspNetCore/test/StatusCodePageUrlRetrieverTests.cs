@@ -1,17 +1,29 @@
+using System;
 using System.Threading.Tasks;
+using BizStream.Kentico.Xperience.AspNetCore.Mvc.Testing;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstractions;
 using CMS.Core;
-using CMS.SiteProvider;
 using Kentico.Content.Web.Mvc;
 using NUnit.Framework;
 
 namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests
 {
 
-    [TestFixture( Category = "Integration" )]
+    [TestFixture( Category = "IsolatedMvc" )]
     [TestOf( typeof( StatusCodePageUrlRetriever ) )]
-    public class StatusCodePageUrlRetrieverTests : BaseWebIntegrationTests
+    public class StatusCodePageUrlRetrieverTests : StatusCodePagesTests<StatusCodePagesTestsStartup>
     {
+        protected override TimeSpan ArtificalDelay => TimeSpan.FromSeconds( 2.5 );
+
+        protected override XperienceWebApplicationFactory<StatusCodePagesTestsStartup> CreateWebApplicationFactory( )
+        {
+            var factory = base.CreateWebApplicationFactory();
+
+            // NOTE: ensures current site context is preserved
+            factory.Server.PreserveExecutionContext = true;
+
+            return factory;
+        }
 
         private StatusCodePageUrlRetriever CreateStatusCodePageUrlRetriever( )
         {
@@ -48,10 +60,8 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests
         }
 
         [SetUp]
-        public void StatusCodePageUrlRetrieverSetUp( )
-        {
-            SiteContext.CurrentSiteName = "NewSite";
-        }
+        public async Task StatusCodePageRetrieverTestsSetUp( )
+            => await Client.GetAsync( "/" );
 
     }
 

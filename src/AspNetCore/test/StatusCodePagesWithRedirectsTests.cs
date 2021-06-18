@@ -1,25 +1,30 @@
 using System.Net;
 using System.Threading.Tasks;
+using BizStream.Kentico.Xperience.AspNetCore.Mvc.Testing;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstractions;
+using Microsoft.AspNetCore.Builder;
 using NUnit.Framework;
 
 namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests
 {
 
-    [TestFixture( Category = "Integration" )]
+    [TestFixture( Category = "IsolatedMvc" )]
     [TestOf( typeof( XperienceStatusCodePagesExtensions ) )]
-    public class StatusCodePagesWithRedirectTests : BaseWebIntegrationTests
+    public class StatusCodePagesWithRedirectsTests : StatusCodePagesTests<StatusCodePagesWithRedirectsTests.Startup>
     {
-
-        protected override WebApplicationFactory CreateWebApplicationFactory( )
+        public class Startup : StatusCodePagesTestsStartup
         {
-            var factory = new WebApplicationFactory(
-                app => app.UseXperienceStatusCodePagesWithRedirect(),
-                configureServices: services => services.AddXperienceStatusCodePages()
-            );
+            public override void ConfigureTests( IApplicationBuilder app )
+                => app.UseXperienceStatusCodePagesWithRedirects();
+        }
 
-            // prevent redirect, so that we can test the redirect
+        protected override XperienceWebApplicationFactory<Startup> CreateWebApplicationFactory( )
+        {
+            var factory = base.CreateWebApplicationFactory();
+
+            // don't follow redirects, so that we can test the StatusCodePages redirect
             factory.ClientOptions.AllowAutoRedirect = false;
+
             return factory;
         }
 
@@ -28,9 +33,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests
         [TestCase( "/not-a-real-url" )]
         public async Task InvalidUrl_ShouldReturn302StatusCode( string url )
         {
-            var client = WebApplicationFactory.CreateClient();
-
-            var response = await client.GetAsync( url );
+            var response = await Client.GetAsync( url );
 
             Assert.AreEqual( HttpStatusCode.Found, response.StatusCode );
         }
@@ -40,9 +43,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests
         [TestCase( "/not-a-real-url" )]
         public async Task InvalidUrl_ShouldReturnLocationHeader( string url )
         {
-            var client = WebApplicationFactory.CreateClient();
-
-            var response = await client.GetAsync( url );
+            var response = await Client.GetAsync( url );
 
             Assert.AreEqual( HttpStatusCode.Found, response.StatusCode );
             Assert.AreEqual( "/404", response.Headers.Location.ToString() );
