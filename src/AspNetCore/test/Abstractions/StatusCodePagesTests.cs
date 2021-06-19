@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using BizStream.Kentico.Xperience.AspNetCore.Mvc.Testing;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Models;
 using CMS.DocumentEngine;
@@ -12,7 +11,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
         where TStartup : StatusCodePagesTestsStartup
     {
         #region Properties
-        protected override TimeSpan ArtificalDelay => TimeSpan.FromSeconds( 1 );
+        //protected override TimeSpan ArtificialDelay => TimeSpan.FromSeconds( 1 );
         #endregion
 
         protected virtual void SeedData( )
