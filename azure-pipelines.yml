@@ -15,6 +15,9 @@ trigger:
       - main
       - develop
 
+variables:
+  - group: Shared Secrets
+
 steps:
   - task: DotNetCoreCLI@2
     displayName: restore dependencies
@@ -29,32 +32,19 @@ steps:
     inputs:
       targetType: inline
       script: |
-        Set-Content -Path src/AspNetCore/test/appsettings.Development.json -Value '{ "CMSTestLicenseKey": "$(CMSTestLicenseKey)" }'
+        $licenseKey = "$(CMSTestLicenseKey)"
+        if ([string]::IsNullOrWhiteSpace($licenseKey)) {
+          throw "CMSTestLicenseKey is invalid.";
+        }
+
+        $content = '{{ "CMSTestLicenseKey": "{0}" }}' -f $licenseKey
+        Set-Content -Path src/Testing/test/appsettings.Development.json -Value $content
 
   - task: DotNetCoreCLI@2
     displayName: build projects
     inputs:
       projects: src/**/*.csproj
       arguments: --no-restore
-
-  # - task: PowerShell@2
-  #   displayName: ensure test db file permissions
-  #   inputs:
-  #     targetType: inline
-  #     script: |
-  #       $path = "${env:BUILD_SOURCESDIRECTORY}\TestDatabases"
-  #       if( -Not ( Test-Path -Path $path ) ) {
-  #         $d = [System.IO.Directory]::CreateDirectory( $path )
-  #       }
-
-  #       $ar = New-Object System.Security.AccessControl.FileSystemAccessRule( "Everyone", "FullControl", "ContainerInherit, ObjectInherit", "None", "Allow" )
-
-  #       $acl = Get-Acl $path
-  #       $acl.AddAccessRule($ar)
-
-  #       Set-Acl $path -AclObject $acl
-  #     failOnStderr: true
-  #     showWarnings: true
 
   - task: DotNetCoreCLI@2
     displayName: test netcoreapp3.1
