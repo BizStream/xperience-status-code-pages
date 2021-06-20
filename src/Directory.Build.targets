@@ -7,7 +7,7 @@
     </ItemGroup>
 
     <ItemGroup Condition=" '$(IsTestProject)' == 'true' ">
-        <PackageReference Include="BizStream.NET.Tests.Sdk" Version="1.0.1" />
+        <PackageReference Include="BizStream.NET.Tests.Sdk" Version="1.0.2" />
         <PackageReference Include="Kentico.Xperience.Libraries.Tests" Version="$(TargetXperienceVersion)" />
     </ItemGroup>
 

@@ -10,9 +10,6 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstracti
     public abstract class StatusCodePagesTests<TStartup> : AutomatedTestsWithIsolatedWebApplication<TStartup>
         where TStartup : StatusCodePagesTestsStartup
     {
-        #region Properties
-        //protected override TimeSpan ArtificialDelay => TimeSpan.FromSeconds( 1 );
-        #endregion
 
         protected virtual void SeedData( )
         {

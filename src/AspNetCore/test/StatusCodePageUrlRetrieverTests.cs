@@ -12,7 +12,6 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests
     [TestOf( typeof( StatusCodePageUrlRetriever ) )]
     public class StatusCodePageUrlRetrieverTests : StatusCodePagesTests<StatusCodePagesTestsStartup>
     {
-        //protected override TimeSpan ArtificialDelay => TimeSpan.FromSeconds( 2.5 );
 
         protected override XperienceWebApplicationFactory<StatusCodePagesTestsStartup> CreateWebApplicationFactory( )
         {

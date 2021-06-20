@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
     <PropertyGroup>
         <GenerateDocumentationFile>false</GenerateDocumentationFile>
@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="BizStream.Kentico.Xperience.AspNetCore.Mvc.Testing" Version="1.0.0-beta.5b554c4" />
+        <PackageReference Include="BizStream.Kentico.Xperience.AspNetCore.Mvc.Testing" Version="1.0.0-beta.b974f1a" />
     </ItemGroup>
 
     <ItemGroup>
