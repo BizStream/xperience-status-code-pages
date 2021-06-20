@@ -11,7 +11,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="BizStream.Kentico.Xperience.AspNetCore.Mvc.Testing" Version="1.0.0-beta.413ed05" />
+        <PackageReference Include="BizStream.Kentico.Xperience.AspNetCore.Mvc.Testing" Version="1.0.0-beta.5b554c4" />
     </ItemGroup>
 
     <ItemGroup>
