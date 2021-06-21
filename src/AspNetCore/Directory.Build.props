@@ -1,0 +1,7 @@
+<Project>
+
+  <PropertyGroup>
+    <IncludeXperienceWebReferences>true</IncludeXperienceWebReferences>
+  </PropertyGroup>
+
+</Project>
