@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Abstractions;
+using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;

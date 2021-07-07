@@ -1,5 +1,9 @@
 <Project>
 
+    <PropertyGroup>
+        <TargetXperienceVersion Condition=" '$(IsTestProject)' == 'true' AND '$(TargetFramework)' == 'net5.0' ">[13.0.19,14.0.0)</TargetXperienceVersion>
+    </PropertyGroup>
+
     <ItemGroup>
         <PackageReference Include="BizStream.NET.Sdk" Version="1.0.1" PrivateAssets="all" />
         <PackageReference Include="Kentico.Xperience.Libraries" Version="$(TargetXperienceVersion)" />
@@ -8,6 +12,7 @@
 
     <ItemGroup Condition=" '$(IsTestProject)' == 'true' ">
         <PackageReference Include="BizStream.NET.Tests.Sdk" Version="1.0.2" />
+        <PackageReference Include="BizStream.Kentico.Xperience.AspNetCore.Mvc.Testing" Version="1.0.0-beta.deffc23" Condition=" '$(IncludeXperienceWebReferences)' == 'true' "  />
         <PackageReference Include="Kentico.Xperience.Libraries.Tests" Version="$(TargetXperienceVersion)" />
     </ItemGroup>
 

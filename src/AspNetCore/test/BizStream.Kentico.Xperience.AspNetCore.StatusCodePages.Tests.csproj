@@ -3,7 +3,6 @@
     <PropertyGroup>
         <GenerateDocumentationFile>false</GenerateDocumentationFile>
         <IsTestProject>true</IsTestProject>
-        <TargetFrameworks>netcoreapp3.1</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,11 +10,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="BizStream.Kentico.Xperience.AspNetCore.Mvc.Testing" Version="1.0.0-beta.b974f1a" />
-    </ItemGroup>
-
-    <ItemGroup>
-        <ProjectReference Include="..\..\Administration\src\BizStream.Kentico.Xperience.Administration.StatusCodePages.csproj" />
         <ProjectReference Include="..\src\BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.csproj" />
     </ItemGroup>
 

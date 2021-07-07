@@ -1,5 +1,6 @@
 using System.Threading.Tasks;
 using BizStream.Kentico.Xperience.AspNetCore.Mvc.Testing;
+using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Infrastructure;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.Abstractions;
 using CMS.Core;
 using Kentico.Content.Web.Mvc;
