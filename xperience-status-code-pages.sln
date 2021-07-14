@@ -9,9 +9,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{AD526D9D-C68
 		src\Directory.Build.targets = src\Directory.Build.targets
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bizstream.Kentico.Xperience.Administration.StatusCodePages", "src\Administration\src\Bizstream.Kentico.Xperience.Administration.StatusCodePages.csproj", "{767019B9-DDB7-429D-AC56-CD8E9A9D538B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BizStream.Kentico.Xperience.Administration.StatusCodePages", "src\Administration\src\BizStream.Kentico.Xperience.Administration.StatusCodePages.csproj", "{767019B9-DDB7-429D-AC56-CD8E9A9D538B}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Bizstream.Kentico.Xperience.AspNetCore.StatusCodePages", "src\AspNetCore\src\Bizstream.Kentico.Xperience.AspNetCore.StatusCodePages.csproj", "{858C04C8-C7B0-4418-87A7-D955A1F61B00}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BizStream.Kentico.Xperience.AspNetCore.StatusCodePages", "src\AspNetCore\src\BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.csproj", "{858C04C8-C7B0-4418-87A7-D955A1F61B00}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Administration", "Administration", "{B646D54C-E370-421B-91B5-F5E23A27EEFB}"
 EndProject
