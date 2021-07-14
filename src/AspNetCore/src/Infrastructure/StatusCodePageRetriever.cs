@@ -4,7 +4,7 @@ using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Abstractions;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Models;
 using Kentico.Content.Web.Mvc;
 
-namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages
+namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Infrastructure
 {
 
     /// <summary> Default implementation of a service that can retrieve a StatusCodePage from the Xperience Content Tree. </summary>
@@ -23,6 +23,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages
             var nodes = await pageRetriever.RetrieveAsync<StatusCodeNode>(
                 nodes => nodes.TopN( 1 ).WhereEquals( nameof( StatusCodeNode.HttpStatusCode ), statusCode ),
                 cache => cache.Key( CacheKeys.StatusCodeNode( statusCode ) )
+                    .Dependencies( ( _, __ ) => { } )
             );
 
             return nodes?.FirstOrDefault();

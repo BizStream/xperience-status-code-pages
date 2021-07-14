@@ -1,6 +1,7 @@
 using System;
 using System.Threading.Tasks;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Abstractions;
+using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Infrastructure;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
@@ -39,7 +40,7 @@ namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages
             => UseXperienceStatusCodePagesWithReExecute( app );
 
         /// <summary> Adds a StatusCodePages middleware to the pipeline. Specifies that responses should be handled by redirecting to a document in the Xperience Content Tree. </summary>
-        public static IApplicationBuilder UseXperienceStatusCodePagesWithRedirect( this IApplicationBuilder app )
+        public static IApplicationBuilder UseXperienceStatusCodePagesWithRedirects( this IApplicationBuilder app )
         {
             if( app == null )
             {

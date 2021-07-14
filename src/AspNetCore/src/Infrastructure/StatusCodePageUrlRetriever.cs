@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 using BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Abstractions;
 using Kentico.Content.Web.Mvc;
 
-namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages
+namespace BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Infrastructure
 {
 
     /// <summary> Default implementation of a service that can retrieve the <see cref="PageUrl"/> of a StatusCodePage from the Xperience Content Tree. </summary>

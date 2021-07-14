@@ -1,0 +1,8 @@
+<Project>
+
+    <PropertyGroup>
+        <IncludeXperienceWebReferences>true</IncludeXperienceWebReferences>
+        <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
+    </PropertyGroup>
+
+</Project>
