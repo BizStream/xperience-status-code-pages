@@ -16,9 +16,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Administration", "Administration", "{B646D54C-E370-421B-91B5-F5E23A27EEFB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AspNetCore", "AspNetCore", "{E52739B0-01D4-46AC-B9C0-06E3A92DD27C}"
-	ProjectSection(SolutionItems) = preProject
-		src\AspNetCore\Directory.Build.props = src\AspNetCore\Directory.Build.props
-	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests", "src\AspNetCore\test\BizStream.Kentico.Xperience.AspNetCore.StatusCodePages.Tests.csproj", "{D2B6D4E2-3451-4719-9E9B-CC637F3FB21F}"
 EndProject

@@ -3,6 +3,8 @@
     <PropertyGroup>
         <GenerateDocumentationFile>false</GenerateDocumentationFile>
         <IsTestProject>true</IsTestProject>
+        <IncludeXperienceWebReferences>true</IncludeXperienceWebReferences>
+        <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>

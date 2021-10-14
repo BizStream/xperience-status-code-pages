@@ -3,6 +3,8 @@
     <PropertyGroup>
         <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
         <VersionPrefix>1.0.1</VersionPrefix>
+        <IncludeXperienceWebReferences>true</IncludeXperienceWebReferences>
+        <TargetFrameworks>netcoreapp3.1;net5.0</TargetFrameworks>
     </PropertyGroup>
 
     <ItemGroup>
