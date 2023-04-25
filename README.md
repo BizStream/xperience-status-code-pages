@@ -7,7 +7,7 @@ ASP.NET Core StatusCodePages driven by the Xperience Content Tree.
 - Install the `Administration` package into the CMSApp project
 
 ```bash
-Install-Package BizStream.Kentico.Xperience.Adminstration.StatusCodePages
+Install-Package BizStream.Kentico.Xperience.Administration.StatusCodePages
 ```
 
 - Install the `AspNetCore` package into the Xperience ASP.NET Core Mvc project:
