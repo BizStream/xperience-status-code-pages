@@ -3,6 +3,9 @@
 
 @model IPageDataContext<StatusCodeNode>
 
-<h1>@Model.Page.DocumentName</h1>
+@if( Model is not null )
+{
+    <h1>@Model.Page.DocumentName</h1>
 
-@Html.Raw( Model.Page.Content )
+    @Html.Raw( Model.Page.Content )
+}
